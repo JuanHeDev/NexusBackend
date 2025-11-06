@@ -37,9 +37,9 @@ server.port=8080
 
 ## 🧰 Ejecución del proyecto
 
-# 1. Clona el repositorio:
+### 1. Clona el repositorio:
 ```Clona el repositorio:```
-# 2. Abre el proyecto en VS Code o IntelliJ IDEA.
-# 3. Ejecuta el proyecto.
+### 2. Abre el proyecto en VS Code o IntelliJ IDEA.
+### 3. Ejecuta el proyecto.
 ```mvn spring-boot:run```
-# 4. Verifica el backend en: 👉 http://localhost:8080
+### 4. Verifica el backend en: 👉 http://localhost:8080
