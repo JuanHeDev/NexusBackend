@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.nexus.model.Usuario;
 import com.project.nexus.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Usuarios")
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -19,6 +23,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @Operation(summary = "Login de usuario")
     @PostMapping("/login")
     public Object login(@RequestBody Usuario datosLogin) {
         Usuario usuario = usuarioService.verificarLogin(datosLogin.getCorreo(), datosLogin.getContrasena());
