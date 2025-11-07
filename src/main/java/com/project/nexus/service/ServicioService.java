@@ -25,10 +25,14 @@ public class ServicioService {
     }
 
     public Servicio actualizarServicio(Long id, Servicio servicio) {
-        Servicio existente = servicioRepository.findById(id).orElseThrow();
+        Servicio existente = servicioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Servicio no encontrado con ID: " + id));
+        
         existente.setTitulo(servicio.getTitulo());
         existente.setDescripcion(servicio.getDescripcion());
-        existente.setImagenUrl(servicio.getImagenUrl());
+        if (servicio.getImagenUrl() != null) {
+            existente.setImagenUrl(servicio.getImagenUrl()); 
+        }
         return servicioRepository.save(existente);
     }
 

@@ -20,5 +20,6 @@ public class Servicio {
     @Column(name = "description", length = 1000)
     private String descripcion;
 
+    @Column(name = "imagen_url")
     private String imagenUrl;
 }
