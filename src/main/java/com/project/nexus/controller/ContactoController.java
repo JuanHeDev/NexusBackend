@@ -8,7 +8,6 @@ import com.project.nexus.model.Contacto;
 import com.project.nexus.service.ContactoService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +25,7 @@ public class ContactoController {
         this.contactoService = contactoService;
     }
 
-    @Operation(summary = "Guardar contacto", description = "Registra un nuevo mensaje de contacto")
-    @ApiResponse(responseCode = "201", description = "Contacto guardado correctamente")
+    @Operation(summary = "Guardar contacto")
     @PostMapping
     public Contacto guardarContacto(@RequestBody Contacto contacto) {
         return contactoService.guardarContacto(contacto);
