@@ -3,6 +3,7 @@ package com.project.nexus.controller;
 import java.io.IOException;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +23,16 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @CrossOrigin(origins = "http://localhost:5173")
 public class UploadController {
     
-    private CloudinaryService cloudinaryService;
+    private final CloudinaryService cloudinaryService;
+
+    public UploadController(CloudinaryService cloudinaryService) {
+        this.cloudinaryService = cloudinaryService;
+    }
 
     @Operation(summary = "Subir imagen")
     @PostMapping
     public ResponseEntity<Map<String, String>> subirImagen(@RequestParam("file") MultipartFile file) throws IOException {
         String imageUrl = cloudinaryService.subirArchivo(file);
-        return ResponseEntity.ok(Map.of("url", imageUrl));
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("url", imageUrl));
     }
 }

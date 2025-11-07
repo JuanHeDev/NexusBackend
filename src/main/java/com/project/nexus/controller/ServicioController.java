@@ -2,6 +2,8 @@ package com.project.nexus.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,25 +33,29 @@ public class ServicioController {
 
     @Operation(summary = "Listar servicios")
     @GetMapping
-    public List<Servicio> listarServicios() {
-        return servicioService.listarServicios();
+    public ResponseEntity<List<Servicio>> listarServicios() {
+        List<Servicio> servicios = servicioService.listarServicios();
+        return ResponseEntity.ok(servicios);
     }
 
     @Operation(summary = "Crear servicio")
     @PostMapping
-    public Servicio crearServicio(@RequestBody Servicio servicio) {
-        return servicioService.guardarServicio(servicio);
+    public ResponseEntity<Servicio> crearServicio(@RequestBody Servicio servicio) {
+        Servicio servicioGuardado = servicioService.guardarServicio(servicio);
+        return ResponseEntity.status(HttpStatus.CREATED).body(servicioGuardado);
     }
 
     @Operation(summary = "Actualizar servicio")
     @PutMapping("/{id}")
-    public Servicio actualizarServicio(@PathVariable Long id, @RequestBody Servicio servicio) {
-        return servicioService.actualizarServicio(id, servicio);
+    public ResponseEntity<Servicio> actualizarServicio(@PathVariable Long id, @RequestBody Servicio servicio) {
+        Servicio servicioActualizado = servicioService.actualizarServicio(id, servicio);
+        return ResponseEntity.ok(servicioActualizado);
     }
 
     @Operation(summary = "Eliminar servicio")
     @DeleteMapping("/{id}")
-    public void eliminarServicio(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminarServicio(@PathVariable Long id) {
         servicioService.eliminarServicio(id);
+        return ResponseEntity.noContent().build();
     }
 }
